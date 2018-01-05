@@ -53,7 +53,10 @@ void Console::PrintCells(const Board &board, int row) {
     {
         const auto& cell = board.cells[row][col];
 
-        Print(Foreground::White, Background::Blue, cell.Color, cell.Type);
+        bool isBlack = (col + row) % 2 == 0;
+        Background b = isBlack ? Background::Blue : Background::Green;
+
+        Print(Foreground::White, b, cell.Color, cell.Type);
     }
 }
 
