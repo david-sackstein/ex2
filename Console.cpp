@@ -12,9 +12,54 @@ void Console::ClearScreen()
     std::cout << _unicodeBuilder.GetClearScreen();
 }
 
+void Console::PrintBoard(const Board &board) {
+
+    PrintLetterLine();
+
+    for (int row=0; row<8; row++)
+    {
+        std::string digit;
+        digit += ('8' - row);
+
+        Print(Foreground::White, Background::Blue, digit);
+        PrintSpace();
+
+        PrintCells(board, row);
+
+        PrintSpace();
+        Print(Foreground::White, Background::Blue, digit);
+
+        PrintLine();
+    }
+}
+
+void Console::PrintLetterLine() {
+    PrintSpace();
+
+    for (int col=0; col<8; col++)
+    {
+        std::string letter;
+        letter += ('A' + col);
+
+        Print(Foreground::White, Background::Blue, letter);
+    }
+
+    PrintLine();
+    PrintLine();
+}
+
+void Console::PrintCells(const Board &board, int row) {
+    for(int col=0; col < 8; col++)
+    {
+        const auto& cell = board.cells[row][col];
+
+        Print(Foreground::White, Background::Blue, cell.Color, cell.Type);
+    }
+}
+
 void Console::Print(Foreground f, Background b, PlayerColor playerColor, PieceType pieceType)
 {
-    PrintLine(f, b, _unicodeBuilder.GetPiece(playerColor, pieceType));
+    Print(f, b, _unicodeBuilder.GetPiece(playerColor, pieceType));
 }
 
 void Console::Print(Foreground f, Background b, const std::string& text)
@@ -25,8 +70,14 @@ void Console::Print(Foreground f, Background b, const std::string& text)
     std::cout << colorString << text << resetString;
 }
 
-void Console::PrintLine(Foreground f, Background b, const std::string& text)
+void Console::PrintLine()
 {
-    Print(f, b, text);
     std::cout << std::endl;
 }
+
+void Console::PrintSpace()
+{
+    std::cout << " ";
+}
+
+

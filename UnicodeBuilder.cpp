@@ -16,6 +16,7 @@ std::string UnicodeBuilder::GetPiece(PlayerColor color, PieceType type)
         case PieceType::Bishop:    return color == PlayerColor::White ? "\u2657" : "\u265D";
         case PieceType::Knight:    return color == PlayerColor::White ? "\u2658" : "\u265E";
         case PieceType::Pawn:      return color == PlayerColor::White ? "\u2659" : "\u265F";
+        case PieceType::None:      return "  ";
     }
     return "Unknown";
 }

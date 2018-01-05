@@ -21,10 +21,18 @@ enum class PlayerColor
 
 enum class PieceType
 {
+    None,
     King,
     Queen,
     Castle,
     Bishop,
     Knight,
     Pawn
+};
+
+class Piece
+{
+public:
+    PieceType Type;
+    PlayerColor Color;
 };
