@@ -4,83 +4,89 @@
 
 Console::Console()
 {
-    SetConsoleOutputCP(437);
+	SetConsoleOutputCP(437);
 }
 
 void Console::ClearScreen()
 {
-    std::cout << _unicodeBuilder.GetClearScreen();
+	std::cout << _unicodeBuilder.GetClearScreen();
 }
 
-void Console::PrintBoard(const Board &board) {
+void Console::PrintBoard(const Board &board)
+{
 
-    PrintLetterLine();
+	PrintLetterLine();
 
-    for (int row=0; row<8; row++)
-    {
-        std::string digit;
-        digit += ('8' - row);
+	for (int row = 0; row < 8; row++)
+	{
+		std::string digit;
+		digit += ('8' - row);
 
-        Print(Foreground::White, Background::Blue, digit);
-        PrintSpace();
+		Print(Foreground::White, Background::Blue, digit);
+		PrintSpace();
 
-        PrintCells(board, row);
+		PrintCells(board, row);
 
-        PrintSpace();
-        Print(Foreground::White, Background::Blue, digit);
+		PrintSpace();
+		Print(Foreground::White, Background::Blue, digit);
 
-        PrintLine();
-    }
+		PrintLine();
+	}
+
+	PrintLine();
+	PrintLetterLine();
 }
 
-void Console::PrintLetterLine() {
-    PrintSpace();
+void Console::PrintLetterLine()
+{
+	PrintSpace();
 
-    for (int col=0; col<8; col++)
-    {
-        std::string letter;
-        letter += ('A' + col);
+	for (int col = 0; col < 8; col++)
+	{
+		std::string letter;
+		letter += ('A' + col);
 
-        Print(Foreground::White, Background::Blue, letter);
-    }
+		Print(Foreground::White, Background::Blue, letter);
+	}
 
-    PrintLine();
-    PrintLine();
+	PrintLine();
+	PrintLine();
 }
 
-void Console::PrintCells(const Board &board, int row) {
-    for(int col=0; col < 8; col++)
-    {
-        const auto& cell = board.cells[row][col];
+void Console::PrintCells(const Board &board, int row)
+{
+	for (int col = 0; col < 8; col++)
+	{
+		const auto &cell = board.cells[row][col];
 
-        bool isBlack = (col + row) % 2 == 0;
-        Background b = isBlack ? Background::Blue : Background::Green;
+		bool isBlue = (col + row) % 2 == 0;
+		Background b = isBlue ? Background::Blue : Background::Green;
 
-        Print(Foreground::White, b, cell.Color, cell.Type);
-    }
+		Print(Foreground::Black, b, cell.Color, cell.Type);
+	}
 }
 
 void Console::Print(Foreground f, Background b, PlayerColor playerColor, PieceType pieceType)
 {
-    Print(f, b, _unicodeBuilder.GetPiece(playerColor, pieceType));
+	Print(f, b, _unicodeBuilder.GetPiece(playerColor, pieceType));
 }
 
-void Console::Print(Foreground f, Background b, const std::string& text)
+void Console::Print(Foreground f, Background b, const std::string &text)
 {
-    std::string colorString = _unicodeBuilder.GetColor(f, b);
-    std::string resetString = _unicodeBuilder.GetResetColor();
+	std::string colorString = _unicodeBuilder.GetColor(f, b);
+	std::string resetString = _unicodeBuilder.GetResetColor();
 
-    std::cout << colorString << text << resetString;
+	std::cout << colorString << text << resetString;
 }
 
 void Console::PrintLine()
 {
-    std::cout << std::endl;
+	std::cout << std::endl;
 }
 
 void Console::PrintSpace()
 {
-    std::cout << " ";
+	std::cout << " ";
 }
 
 

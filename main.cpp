@@ -1,16 +1,57 @@
 #include "Console.h"
+#include <iostream>
 
-void Run() {
+enum Turn
+{
+	white,
+	black,
+};
 
-    Board board;
-    Console console;
+void getPlayersNames(std::string &whitePlayer, std::string &blackPlayer)
+{
+	std::cout << "Enter white player name:\n";
+	getline(std::cin, whitePlayer);
 
-    console.PrintBoard(board);
+	std::cout << "Enter black player name:\n";
+	getline(std::cin, blackPlayer);
 }
 
-int main() {
+void getTurn(std::string player, std::string &move)
+{
+	std::cout<<player<<": Please enter your move:\n";
+	getline(std::cin, move);
+}
 
-    Run();
+void Run()
+{
+	Board board;
+	Console console;
 
-    return 0;
+	std::string whitePlayer;
+	std::string blackPlayer;
+
+	getPlayersNames(whitePlayer, blackPlayer);
+
+	while (true)
+	{
+		Turn turn = white;
+		std::string move;
+
+		std::string currPlayer = turn == white ? whitePlayer : blackPlayer;
+
+		getTurn(currPlayer, move);
+
+		turn = turn == white ? black : white;
+
+		break;
+	}
+
+	console.PrintBoard(board);
+}
+
+int main()
+{
+	Run();
+
+	return 0;
 }
