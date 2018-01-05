@@ -30,21 +30,21 @@ void Run()
 	std::string whitePlayer;
 	std::string blackPlayer;
 
-	getPlayersNames(whitePlayer, blackPlayer);
+	//getPlayersNames(whitePlayer, blackPlayer);
 
-	while (true)
-	{
-		Turn turn = white;
-		std::string move;
-
-		std::string currPlayer = turn == white ? whitePlayer : blackPlayer;
-
-		getTurn(currPlayer, move);
-
-		turn = turn == white ? black : white;
-
-		break;
-	}
+//	while (true)
+//	{
+//		Turn turn = white;
+//		std::string move;
+//
+//		std::string currPlayer = turn == white ? whitePlayer : blackPlayer;
+//
+//		getTurn(currPlayer, move);
+//
+//		turn = turn == white ? black : white;
+//
+//		break;
+//	}
 
 	console.PrintBoard(board);
 }

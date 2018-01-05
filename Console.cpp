@@ -14,13 +14,11 @@ void Console::ClearScreen()
 
 void Console::PrintBoard(const Board &board)
 {
-
 	PrintLetterLine();
 
 	for (int row = 0; row < 8; row++)
 	{
-		std::string digit;
-		digit += ('8' - row);
+		std::string digit = _unicodeBuilder.GetDigit(row);
 
 		Print(Foreground::White, Background::Blue, digit);
 		PrintSpace();
@@ -40,11 +38,11 @@ void Console::PrintBoard(const Board &board)
 void Console::PrintLetterLine()
 {
 	PrintSpace();
+	PrintSpace();
 
-	for (int col = 0; col < 8; col++)
+	for (char col = 'A'; col < 'I'; col++)
 	{
-		std::string letter;
-		letter += ('A' + col);
+		std::string letter = _unicodeBuilder.GetLetter(col);
 
 		Print(Foreground::White, Background::Blue, letter);
 	}
@@ -86,7 +84,7 @@ void Console::PrintLine()
 
 void Console::PrintSpace()
 {
-	std::cout << " ";
+	std::cout << _unicodeBuilder.GetSpace();
 }
 
 

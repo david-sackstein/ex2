@@ -23,5 +23,4 @@ private:
     void PrintSpace();
 
     UnicodeBuilder _unicodeBuilder;
-
 };
